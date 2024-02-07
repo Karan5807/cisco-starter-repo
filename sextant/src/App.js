@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Banner from './bannerComp';
 import InfoContainer from './infoContainer';
+import LatencyMonitor from './LatencyComp';
 import Axios from "axios";
 
 function App() {
@@ -13,7 +14,6 @@ function App() {
       const ipAddress = await Axios.get("https://api.ipify.org?format=json");
       const Data = ipAddress.data.ip;
       setIPv4(Data);
-      console.log(Data);
     } catch (error) {
       console.error(error);
     }
@@ -27,7 +27,7 @@ function App() {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   useEffect(() => {
     getIPv4();
@@ -44,6 +44,7 @@ function App() {
       {/* Section for InfoConatiner */}
       <InfoContainer children={`The IPv4 Address is of my System is: ${IPv4}`}/>
       <InfoContainer children={`The IPv6 Address of my system is: ${IPv6}`}/>
+      <LatencyMonitor/>
     </div>
   );
 }

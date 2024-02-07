@@ -1,8 +1,13 @@
 {
     "name": "pylon",
     "version": "0.1.0",
+    "type": "module",
+    "scripts": {
+        "start": "nodemon server.js"
+    },
     "private": true,
     "dependencies": {
+        "nodemon": "^3.0.3",
         "websocket": "^1.0.34"
     }
 }
