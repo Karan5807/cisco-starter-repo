@@ -1,29 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import  Axios  from 'axios';
+import React, { useState, useEffect} from 'react';
+import { w3cwebsocket as W3CWebSocket } from "websocket";
 import './App.css';
 
 const LatencyMonitor = () => {
   const [latency, setLatency] = useState(0);
+  const client = new W3CWebSocket('ws://localhost:5555');
 
-  const Latency = async() =>{
-    try {
-      const latency = await Axios.get("ws://localhost:55455/");
-      const Data = latency.data;
-      setLatency(Data)
-      console.log(Data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  // client.onmessage = (message) =>{
+  //   setLatency(new Date().getTime-message.data);
+  // }
 
-  // Simulate updating latency value (you should replace this with actual data fetching)
   useEffect(() => {
     const interval = setInterval(() => {
       // Simulate fetching new latency value (replace this with your actual data fetching logic)
-      const newLatency = Math.floor(Math.random() * 100) + 1;
+      const newLatency =   client.onmessage = (message) =>{
+        setLatency(new Date().getTime-message.data);
+      }
       setLatency(newLatency);
     }, 2000); // Update every 2 seconds
-
     return () => clearInterval(interval);
   }, []);
 
