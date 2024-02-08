@@ -6,19 +6,11 @@ const LatencyMonitor = () => {
   const [latency, setLatency] = useState(0);
   const client = new W3CWebSocket('ws://localhost:5555');
 
-  // client.onmessage = (message) =>{
-  //   setLatency(new Date().getTime-message.data);
-  // }
-
   useEffect(() => {
-    const interval = setInterval(() => {
-      // Simulate fetching new latency value (replace this with your actual data fetching logic)
-      const newLatency =   client.onmessage = (message) =>{
-        setLatency(new Date().getTime-message.data);
-      }
-      setLatency(newLatency);
-    }, 2000); // Update every 2 seconds
-    return () => clearInterval(interval);
+    client.onmessage = (message) =>{
+      console.log(new Date().getTime-message.data);
+      setLatency(new Date().getTime-message.data);
+    }
   }, []);
 
   return (
